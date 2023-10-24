@@ -1,4 +1,5 @@
 import sys
+
 from ROOT import TFile  # pylint: disable=import-error
 
 for f in sys.argv[1:]:

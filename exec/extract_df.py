@@ -3,6 +3,7 @@ Script to extract data frames from AO2D.root files with information about parent
 """
 
 import sys
+
 from ROOT import TFile, TObject  # pylint: disable=import-error
 
 # print(f"Name of the script      : {sys.argv[0]=}")
