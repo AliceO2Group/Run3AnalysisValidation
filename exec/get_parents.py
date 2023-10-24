@@ -1,5 +1,5 @@
 import sys
-from ROOT import TFile
+from ROOT import TFile  # pylint: disable=import-error
 
 for f in sys.argv[1:]:
     file = TFile.Open(f)
