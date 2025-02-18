@@ -446,7 +446,20 @@ workflows:
       - o2-analysis-track-dca_runX
       - o2-analysis-pid-tof-full_runX
       - o2-analysis-pid-tpc
-    tables: [HF3PCOLLBASE, HF3PCOLLID, HF3PMCCOLLBASE, HF3PMCCOLLID, HF3PMCRCOLLID, HF3PBASE, HF3PPAR, HF3PPARE, HF3PSEL, HF3PML, HF3PID, HF3PMC, HF3PPBASE, HF3PPID]
+    tables: [HFLCCOLLBASE, HFLCCOLLID, HFLCMCCOLLBASE, HFLCMCCOLLID, HFLCMCRCOLLID, HFLCBASE, HFLCPAR, HFLCPARE, HFLCSEL, HFLCML, HFLCID, HFLCMC, HFLCPBASE, HFLCPID]
+
+  o2-analysis-hf-derived-data-creator-dplus-to-pi-k-pi:
+    dependencies:
+      - o2-analysis-hf-candidate-selector-dplus-to-pi-k-pi
+      - o2-analysis-hf-candidate-creator-3prong_derX
+      - o2-analysis-hf-pid-creator
+      - o2-analysis-centrality_runX
+      - o2-analysis-lf-mc-centrality
+      - o2-analysis-multiplicity-table_runX
+      - o2-analysis-track-dca_runX
+      - o2-analysis-pid-tof-full_runX
+      - o2-analysis-pid-tpc
+    tables: [HFDPCOLLBASE, HFDPCOLLID, HFDPMCCOLLBASE, HFDPMCCOLLID, HFDPMCRCOLLID, HFDPBASE, HFDPPAR, HFDPPARE, HFDPSEL, HFDPML, HFDPID, HFDPMC, HFDPPBASE, HFDPPID]
 
   o2-analysis-hf-derived-data-creator-bplus-to-d0-pi:
     dependencies:
@@ -459,7 +472,7 @@ workflows:
       - o2-analysis-track-dca_runX
       - o2-analysis-pid-tof-full_runX
       - o2-analysis-pid-tpc
-    tables: [HFCOLLBASE, HFCOLLID, HFMCCOLLBASE, HFMCCOLLID, HFMCRCOLLID, HFBPBASE, HFBPPAR, HFBPPARD0, HFBPPARE, HFBPML, HFBPMLD0, HFBPID, HFBPMC, HFBPPBASE, HFBPPID]
+    tables: [HFBPCOLLBASE, HFBPCOLLID, HFBPMCCOLLBASE, HFBPMCCOLLID, HFBPMCRCOLLID, HFBPBASE, HFBPPAR, HFBPPARD0, HFBPPARE, HFBPML, HFBPMLD0, HFBPID, HFBPMC, HFBPPBASE, HFBPPID]
 
   # D meson correlations
 
