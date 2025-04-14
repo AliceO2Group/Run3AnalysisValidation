@@ -21,7 +21,7 @@ jobs:
 
       - name: Clang Format
         id: clang
-        uses: DoozyX/clang-format-lint-action@v0.18.2
+        uses: DoozyX/clang-format-lint-action@v0.20
         with:
           #source: '.'
           #exclude: './third_party ./external'
