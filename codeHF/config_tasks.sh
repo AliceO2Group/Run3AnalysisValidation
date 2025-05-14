@@ -71,7 +71,7 @@ DOO2_SEL_XIC_XIPIPI=0   # hf-candidate-selector-xic-to-xi-pi-pi
 DOO2_TASK_D0=1      # hf-task-d0
 DOO2_TASK_DS=0      # hf-task-ds
 DOO2_TASK_DPLUS=0   # hf-task-dplus
-DOO2_TASK_LC=1      # hf-task-lc
+DOO2_TASK_LC=0      # hf-task-lc
 DOO2_TASK_LB=0      # hf-task-lb
 DOO2_TASK_XIC=0     # hf-task-xic
 DOO2_TASK_JPSI=0    # hf-task-jpsi
@@ -98,6 +98,7 @@ DOO2_TREE_XIC_XIPIPI=0  # hf-tree-creator-xic-to-xi-pi-pi
 DOO2_DATA_D0=0      # hf-derived-data-creator-d0-to-k-pi
 DOO2_DATA_LC=0      # hf-derived-data-creator-lc-to-p-k-pi
 DOO2_DATA_BPLUS=0   # hf-derived-data-creator-bplus-to-d0-pi
+DOO2_DATA_B0=0      # hf-derived-data-creator-b0-to-d-pi
 DOO2_DATA_DPLUS=0   # hf-derived-data-creator-dplus-to-pi-k-pi
 # Correlations
 DOO2_CORR_D0D0BAR_DATA=0       # hf-correlator-d0-d0bar
@@ -134,6 +135,7 @@ DOO2_CONV_COLL=0       # collision-converter
 DOO2_CONV_MCCOLL=0     # mccollision-converter
 DOO2_CONV_ZDC=0        # zdc-converter
 DOO2_CONV_BC=0         # bc-converter
+DOO2_CONV_BCINFO=0     # run2bcinfos-converter
 DOO2_CONV_TRKEX_0_1=0  # tracks-extra-converter (0→1)
 DOO2_CONV_TRKEX_0_2=0  # tracks-extra-v002-converter (0→2)
 DOO2_CONV_TRKEX_1_2=0  # tracks-extra-v002-converter (1→2)
@@ -509,6 +511,7 @@ function MakeScriptO2 {
   [ $DOO2_DATA_D0 -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-d0-to-k-pi"
   [ $DOO2_DATA_LC -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-lc-to-p-k-pi"
   [ $DOO2_DATA_BPLUS -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-bplus-to-d0-pi"
+  [ $DOO2_DATA_B0 -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-b0-to-d-pi"
   [ $DOO2_DATA_DPLUS -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-dplus-to-pi-k-pi"
   # Correlations
   WF_CORR=""
@@ -554,6 +557,7 @@ function MakeScriptO2 {
   [ $DOO2_CONV_MCCOLL -eq 1 ] && WORKFLOWS+=" o2-analysis-mccollision-converter"
   [ $DOO2_CONV_ZDC -eq 1 ] && WORKFLOWS+=" o2-analysis-zdc-converter"
   [ $DOO2_CONV_BC -eq 1 ] && WORKFLOWS+=" o2-analysis-bc-converter"
+  [ $DOO2_CONV_BCINFO -eq 1 ] && WORKFLOWS+=" o2-analysis-run2bcinfos-converter"
   [ $DOO2_CONV_TRKEX_0_1 -eq 1 ] && WORKFLOWS+=" o2-analysis-tracks-extra-converter"
   [[ $DOO2_CONV_TRKEX_0_2 -eq 1 || $DOO2_CONV_TRKEX_1_2 -eq 1 ]] && WORKFLOWS+=" o2-analysis-tracks-extra-v002-converter"
   [ $DOO2_CONV_V0 -eq 1 ] && WORKFLOWS+=" o2-analysis-v0converter"

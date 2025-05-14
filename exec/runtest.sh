@@ -24,7 +24,7 @@ DOPOSTPROCESS=1  # Run output postprocessing. (Compare AliPhysics and O2 output.
 # Input parameters
 INPUT_CASE=-1                   # Input case
 INPUT_LABEL="nothing"           # Input description
-INPUT_DIR="$PWD"                # Input directory
+INPUT_DIR="-"                   # Input directory
 INPUT_FILES="AliESDs.root"      # Input file pattern
 INPUT_SYS="pp"                  # Collision system ("pp", "PbPb")
 INPUT_RUN=2                     # LHC Run (2, 3, 5)

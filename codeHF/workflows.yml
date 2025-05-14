@@ -329,13 +329,17 @@ workflows:
     dependencies: o2-analysis-hf-candidate-selector-jpsi_runX
 
   o2-analysis-hf-task-dplus:
-    dependencies: o2-analysis-hf-candidate-selector-dplus-to-pi-k-pi
+    dependencies:
+      - o2-analysis-hf-candidate-selector-dplus-to-pi-k-pi
+      - o2-analysis-centrality_runX
 
   o2-analysis-hf-task-ds:
     dependencies: o2-analysis-hf-candidate-selector-ds-to-k-k-pi
 
   o2-analysis-hf-task-dstar-to-d0-pi:
-    dependencies: o2-analysis-hf-candidate-selector-dstar-to-d0-pi
+    dependencies:
+      - o2-analysis-hf-candidate-selector-dstar-to-d0-pi
+      - o2-analysis-centrality_runX
 
   o2-analysis-hf-task-lc:
     dependencies: o2-analysis-hf-candidate-selector-lc
@@ -460,6 +464,19 @@ workflows:
       - o2-analysis-pid-tof-full_runX
       - o2-analysis-pid-tpc
     tables: [HFDPCOLLBASE, HFDPCOLLID, HFDPMCCOLLBASE, HFDPMCCOLLID, HFDPMCRCOLLID, HFDPBASE, HFDPPAR, HFDPPARE, HFDPSEL, HFDPML, HFDPID, HFDPMC, HFDPPBASE, HFDPPID]
+
+  o2-analysis-hf-derived-data-creator-b0-to-d-pi:
+    dependencies:
+      - o2-analysis-hf-candidate-selector-b0-to-d-pi
+      - o2-analysis-hf-candidate-creator-b0
+      - o2-analysis-hf-pid-creator
+      - o2-analysis-centrality_runX
+      - o2-analysis-lf-mc-centrality
+      - o2-analysis-multiplicity-table_runX
+      - o2-analysis-track-dca_runX
+      - o2-analysis-pid-tof-full_runX
+      - o2-analysis-pid-tpc
+    tables: [HFB0COLLBASE, HFB0COLLID, HFB0MCCOLLBASE, HFB0MCCOLLID, HFB0MCRCOLLID, HFB0BASE, HFB0PAR, HFB0PARD0, HFB0PARE, HFB0ML, HFB0MLD0, HFB0ID, HFB0MC, HFB0PBASE, HFB0PID]
 
   o2-analysis-hf-derived-data-creator-bplus-to-d0-pi:
     dependencies:
@@ -715,6 +732,8 @@ workflows:
   o2-analysis-zdc-converter: {}
 
   o2-analysis-bc-converter: {}
+
+  o2-analysis-run2bcinfos-converter: {}
 
   o2-analysis-tracks-extra-converter: {}
 
