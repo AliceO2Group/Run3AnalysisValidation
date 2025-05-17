@@ -1,0 +1,34 @@
+[FORMAT]
+indent-string='    '
+max-line-length=120
+
+[BASIC]
+variable-rgx=(?:(?P<snake>[a-z_]+))
+
+[TYPECHECK]
+generated-members=RdBu
+
+[DESIGN]
+max-args=10
+max-locals=40
+
+[MESSAGES CONTROL]
+disable=
+    useless-suppression,
+    too-few-public-methods,
+    too-many-arguments,
+    too-many-branches,
+    too-many-instance-attributes,
+    too-many-lines,
+    too-many-locals,
+    too-many-nested-blocks,
+    too-many-positional-arguments,
+    too-many-public-methods,
+    too-many-return-statements,
+    too-many-statements
+
+[MISCELLANEOUS]
+notes=FIXME,XXX
+
+[IMPORTS]
+ignored-modules=ROOT,yaml,pandas,numpy,shap,uproot
