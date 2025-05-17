@@ -1,7 +1,6 @@
 # Run 3 validation framework
 
 [![MegaLinter](https://github.com/AliceO2Group/Run3Analysisvalidation/workflows/MegaLinter/badge.svg?branch=master)](https://github.com/AliceO2Group/Run3Analysisvalidation/actions?query=workflow%3AMegaLinter+branch%3Amaster)
-[![pre-commit.ci](https://results.pre-commit.ci/badge/github/AliceO2Group/Run3AnalysisValidation/master.svg)](https://results.pre-commit.ci/latest/github/AliceO2Group/Run3AnalysisValidation/master)
 
 ## Introduction
 
