@@ -4,7 +4,7 @@
 # Input specification for runtest.sh
 # (Modifies input parameters.)
 
-INPUT_CASE=2            # Input case
+INPUT_CASE=17            # Input case
 
 NFILESMAX=1             # Maximum number of processed input files. (Set to -0 to process all; to -N to process all but the last N files.)
 
@@ -151,12 +151,12 @@ case $INPUT_CASE in
     INPUT_TASK_CONFIG="DOO2_CONV_MCCOLL=1 DOO2_CONV_TRKEX_1_2=1"
     ;;
   17)
-    INPUT_LABEL="Run 3, p-p 13.6 TeV, LHC22o_pass7"
-    INPUT_DIR="$INPUT_BASE/Run3/pp_13.6TeV/real/LHC22o_pass7"
+    INPUT_LABEL="Run 3, p-p 13.6 TeV, LHC22o_pass4_minBias_small"
+    INPUT_DIR="$INPUT_BASE/Run3/pp_13.6TeV/real/LHC22o_pass4_minBias_small"
     INPUT_FILES="AO2D.root"
     INPUT_RUN=3
     INPUT_IS_O2=1
     INPUT_IS_MC=0
-    INPUT_TASK_CONFIG="DOO2_CONV_MCCOLL=1 DOO2_CONV_TRKEX_1_2=1"
+    INPUT_TASK_CONFIG="DOO2_CONV_MCCOLL=1 DOO2_CONV_BC=1 DOO2_CONV_TRKEX_0_2=1"
     ;;
   esac

@@ -1,12 +1,12 @@
 ---
 options:
-  global:  # used once at the end of the command
+  global: # used once at the end of the command
     - "--aod-memory-rate-limit 2000000000"
     - "--shm-segment-size 16000000000"
     - "--aod-parent-base-path-replacement \"PARENT_PATH_MASK\""
     - "--aod-parent-access-level 1"
     - "--resources-monitoring 2"
-  local:  # used for every workflow
+  local: # used for every workflow
     - "-b"
     - "--configuration json://\"$JSON\""
     # - "--min-failure-level error"
@@ -14,15 +14,15 @@ options:
 workflows:
   # dummy workflow with the full list of options
   o2-analysis-workflow:
-    executable: o2-analysis-workflow  # workflow command, if different from the dictionary node name above
-    dependencies: []  # dictionary nodes that this workflow needs as direct dependencies (format: str, list)
-    requires_mc: no  # yes/no whether the workflow can only run on MC or not
-    options: "--option"  # command line options (format: str, list), see more detailed format below
+    executable: o2-analysis-workflow # workflow command, if different from the dictionary node name above
+    dependencies: [] # dictionary nodes that this workflow needs as direct dependencies (format: str, list)
+    requires_mc: no # yes/no whether the workflow can only run on MC or not
+    options: "--option" # command line options (format: str, list), see more detailed format below
     # options:
     #   default: ""
     #   real: ""
     #   mc: "--doMC"
-    tables: []  # descriptions of output tables to be saved as trees (format: str, list), see more detailed format below
+    tables: [] # descriptions of output tables to be saved as trees (format: str, list), see more detailed format below
     # tables:
     #   default: []
     #   real: []
@@ -38,7 +38,7 @@ workflows:
       - o2-analysis-track-to-collision-associator
       # - o2-analysis-centrality_runX
       - o2-analysis-multiplicity-table_runX
-      - o2-analysis-pid-tpc
+      # - o2-analysis-pid-tpc
     tables: [HF2PRONG/1, HF3PRONG/1, HFDSTAR, HFCASCADE/1, HFCASCLF2PRONG, HFCASCLF3PRONG, HFCUTSTATUS2P, HFCUTSTATUS3P, HFPVREFIT2PRONG, HFPVREFIT3PRONG, HFPVREFITTRACK, HFSELCOLLISION, HFSELTRACK]
 
   o2-analysis-hf-track-index-skim-creator_v0:
@@ -75,7 +75,9 @@ workflows:
 
   o2-analysis-hf-candidate-creator-2prong_derived:
     <<: *cand_creator_2p
-    dependencies: o2-analysis-track-dca_runX
+    dependencies:
+      - o2-analysis-track-dca_runX
+      - o2-analysis-trackselection_runX
 
   o2-analysis-hf-candidate-creator-3prong: &cand_creator_3p
     <<: *cand_creator_2p
@@ -86,7 +88,9 @@ workflows:
 
   o2-analysis-hf-candidate-creator-3prong_derived:
     <<: *cand_creator_3p
-    dependencies: o2-analysis-track-dca_runX
+    dependencies:
+      - o2-analysis-track-dca_runX
+      - o2-analysis-trackselection_runX
 
   o2-analysis-hf-candidate-creator-dstar: &cand_creator_dstar
     <<: *cand_creator_2p
@@ -97,7 +101,9 @@ workflows:
 
   o2-analysis-hf-candidate-creator-dstar_derived:
     <<: *cand_creator_dstar
-    dependencies: o2-analysis-track-dca_runX
+    dependencies:
+      - o2-analysis-track-dca_runX
+      - o2-analysis-trackselection_runX
 
   o2-analysis-hf-candidate-creator-cascade: &cand_creator_cascade
     <<: *cand_creator_2p
@@ -118,6 +124,7 @@ workflows:
     <<: *cand_creator_cascade
     dependencies:
       - o2-analysis-track-dca_runX
+      - o2-analysis-trackselection_runX
       - o2-analysis-event-selection
       - o2-analysis-hf-pid-creator
       - o2-analysis-pid-tof-full_runX
@@ -432,7 +439,7 @@ workflows:
       - o2-analysis-hf-candidate-creator-2prong_derX
       - o2-analysis-hf-pid-creator
       - o2-analysis-centrality_runX
-      - o2-analysis-lf-mc-centrality
+      # - o2-analysis-lf-mc-centrality
       - o2-analysis-multiplicity-table_runX
       - o2-analysis-track-dca_runX
       - o2-analysis-pid-tof-full_runX
@@ -464,6 +471,19 @@ workflows:
       - o2-analysis-pid-tof-full_runX
       - o2-analysis-pid-tpc
     tables: [HFDPCOLLBASE, HFDPCOLLID, HFDPMCCOLLBASE, HFDPMCCOLLID, HFDPMCRCOLLID, HFDPBASE, HFDPPAR, HFDPPARE, HFDPSEL, HFDPML, HFDPID, HFDPMC, HFDPPBASE, HFDPPID]
+
+  o2-analysis-hf-derived-data-creator-ds-to-k-k-pi:
+    dependencies:
+      - o2-analysis-hf-candidate-selector-ds-to-k-k-pi
+      - o2-analysis-hf-candidate-creator-3prong_derX
+      - o2-analysis-hf-pid-creator
+      - o2-analysis-centrality_runX
+      - o2-analysis-lf-mc-centrality
+      - o2-analysis-multiplicity-table_runX
+      - o2-analysis-track-dca_runX
+      - o2-analysis-pid-tof-full_runX
+      - o2-analysis-pid-tpc
+    tables: [HFDSCOLLBASE, HFDSCOLLID, HFDSMCCOLLBASE, HFDSMCCOLLID, HFDSMCRCOLLID, HFDSBASE, HFDSPAR, HFDSPARE, HFDSSEL, HFDSML, HFDSID, HFDSMC, HFDSPBASE, HFDSPID]
 
   o2-analysis-hf-derived-data-creator-b0-to-d-pi:
     dependencies:

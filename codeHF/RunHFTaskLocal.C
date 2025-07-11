@@ -13,6 +13,16 @@
 
 #include "../exec/utilitiesAli.h"
 
+#ifdef __CLING__
+// Tell ROOT where to find AliRoot headers
+R__ADD_INCLUDE_PATH($ALICE_ROOT)
+// Tell ROOT where to find AliPhysics headers
+R__ADD_INCLUDE_PATH($ALICE_PHYSICS)
+
+#include "PWGPP/PilotTrain/AddTaskCDBconnect.C"
+
+#endif
+
 Long64_t RunHFTaskLocal(TString txtfile = "./list_ali.txt",
                         TString jsonfilename = "dpl-config_std.json",
                         Bool_t isMC = kFALSE,
@@ -53,6 +63,10 @@ Long64_t RunHFTaskLocal(TString txtfile = "./list_ali.txt",
     handler->SetReadTR(kFALSE);
     mgr->SetMCtruthEventHandler(handler);
   }
+
+  // CDBconnect task
+  AliTaskCDBconnect* taskCDB = AddTaskCDBconnect();
+  taskCDB->SetFallBackToRaw(kTRUE);
 
   // Apply the event selection
   AliPhysicsSelectionTask* physSelTask = reinterpret_cast<AliPhysicsSelectionTask*>(gInterpreter->ProcessLine(Form(".x %s(%d)", gSystem->ExpandPathName("$ALICE_PHYSICS/OADB/macros/AddTaskPhysicsSelection.C"), isMC)));

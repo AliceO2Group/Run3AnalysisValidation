@@ -31,13 +31,13 @@ DOPOSTPROCESS=1     # Run output postprocessing. (Comparison plots. Requires DOA
 
 DATABASE_O2="workflows.yml"  # Workflow specification database
 MAKE_GRAPH=0                 # Make topology graph.
-MAKE_PERF_STATS=0            # Produce performance profiling stats.
+MAKE_PERF_STATS=1            # Produce performance profiling stats.
 
 # Activation of O2 workflows
 # Trigger selection
-DOO2_TRIGSEL=0      # event-selection
+DOO2_TRIGSEL=1      # event-selection
 # Vertexing
-DOO2_SKIM=0         # hf-track-index-skim-creator
+DOO2_SKIM=1         # hf-track-index-skim-creator
 DOO2_CAND_2PRONG=0  # hf-candidate-creator-2prong
 DOO2_CAND_3PRONG=0  # hf-candidate-creator-3prong
 DOO2_CAND_CASC=0    # hf-candidate-creator-cascade
@@ -68,7 +68,7 @@ DOO2_SEL_DSTAR=0    # hf-candidate-selector-dstar
 DOO2_SEL_TOXIPI=0   # hf-candidate-selector-to-xi-pi
 DOO2_SEL_XIC_XIPIPI=0   # hf-candidate-selector-xic-to-xi-pi-pi
 # Analysis tasks
-DOO2_TASK_D0=1      # hf-task-d0
+DOO2_TASK_D0=0      # hf-task-d0
 DOO2_TASK_DS=0      # hf-task-ds
 DOO2_TASK_DPLUS=0   # hf-task-dplus
 DOO2_TASK_LC=0      # hf-task-lc
@@ -99,7 +99,8 @@ DOO2_DATA_D0=0      # hf-derived-data-creator-d0-to-k-pi
 DOO2_DATA_LC=0      # hf-derived-data-creator-lc-to-p-k-pi
 DOO2_DATA_BPLUS=0   # hf-derived-data-creator-bplus-to-d0-pi
 DOO2_DATA_B0=0      # hf-derived-data-creator-b0-to-d-pi
-DOO2_DATA_DPLUS=0   # hf-derived-data-creator-dplus-to-pi-k-pi
+DOO2_DATA_DPLUS=1   # hf-derived-data-creator-dplus-to-pi-k-pi
+DOO2_DATA_DS=0      # hf-derived-data-creator-ds-to-k-k-pi
 # Correlations
 DOO2_CORR_D0D0BAR_DATA=0       # hf-correlator-d0-d0bar
 DOO2_CORR_D0D0BAR_MCREC=0      # hf-correlator-d0-d0bar_mc-rec
@@ -437,6 +438,7 @@ function MakeScriptO2 {
   [[ $DOO2_CAND_CASC -eq 1 || $DOO2_SEL_LCK0SP -eq 1 || $DOO2_TASK_LCK0SP -eq 1 || $DOO2_TREE_LCK0SP -eq 1 ]] && SUFFIX_SKIM="_v0"
   # Ξc0/Ωc0 → Ξ π LF cascade reconstruction
   [[ $DOO2_CAND_XIC0OC0 -eq 1 || $DOO2_SEL_TOXIPI -eq 1 || $DOO2_TREE_TOXIPI -eq 1 || $DOO2_CAND_XIC_XIPIPI -eq 1 || $DOO2_SEL_XIC_XIPIPI -eq 1 || $DOO2_TASK_XIC_XIPIPI -eq 1 || $DOO2_TREE_XIC_XIPIPI -eq 1 ]] && SUFFIX_SKIM="_casc-lf"
+  SUFFIX_SKIM="_casc-lf"
 
   # Suffix to distinguish versions of the same workflow for different runs in the workflow database
   SUFFIX_RUN_MASK="_runX" # suffix mask to be replaced in the workflow names
@@ -513,6 +515,7 @@ function MakeScriptO2 {
   [ $DOO2_DATA_BPLUS -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-bplus-to-d0-pi"
   [ $DOO2_DATA_B0 -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-b0-to-d-pi"
   [ $DOO2_DATA_DPLUS -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-dplus-to-pi-k-pi"
+  [ $DOO2_DATA_DS -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-ds-to-k-k-pi"
   # Correlations
   WF_CORR=""
   [ $DOO2_CORR_D0D0BAR_DATA -eq 1 ] && WF_CORR="o2-analysis-hf-correlator-d0-d0bar o2-analysis-hf-task-correlation-d-dbar"
