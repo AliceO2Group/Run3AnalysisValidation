@@ -1,3 +1,4 @@
+---
 BasedOnStyle: Google
 AccessModifierOffset: -1
 AlignEscapedNewlinesLeft: true
@@ -14,7 +15,7 @@ BreakBeforeBraces: Linux
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializersBeforeComma: false
 ColumnLimit: 0
-CommentPragmas:  '^ IWYU pragma:'
+CommentPragmas: '^ IWYU pragma:'
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 2
 ContinuationIndentWidth: 2
@@ -23,10 +24,10 @@ DerivePointerBinding: false
 ExperimentalAutoDetectBinPacking: false
 IndentCaseLabels: true
 IndentFunctionDeclarationAfterType: true
-IndentWidth:     2
+IndentWidth: 2
 # It is broken on windows. Breaks all #include "header.h"
 ---
-Language:        Cpp
+Language: Cpp
 MaxEmptyLinesToKeep: 1
 KeepEmptyLinesAtTheStartOfBlocks: true
 NamespaceIndentation: None
@@ -43,19 +44,18 @@ SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 1
-SpacesInAngles:  false
+SpacesInAngles: false
 SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
-Standard:        Cpp11
-TabWidth:        2
-UseTab:          Never
+Standard: Cpp11
+TabWidth: 2
+UseTab: Never
 ---
 # Do not format protobuf files
 Language: Proto
 DisableFormat: true
-# ---
-# # Since clang-format 13.0.0
-# Language: Json
-# # O2 dumps JSON files with 4-space indents.
-# IndentWidth: 4
+---
+Language: Json
+# O2 dumps JSON files with 4-space indents.
+IndentWidth: 4
