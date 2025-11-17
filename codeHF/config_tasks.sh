@@ -31,13 +31,13 @@ DOPOSTPROCESS=1     # Run output postprocessing. (Comparison plots. Requires DOA
 
 DATABASE_O2="workflows.yml"  # Workflow specification database
 MAKE_GRAPH=0                 # Make topology graph.
-MAKE_PERF_STATS=1            # Produce performance profiling stats.
+MAKE_PERF_STATS=0            # Produce performance profiling stats.
 
 # Activation of O2 workflows
 # Trigger selection
-DOO2_TRIGSEL=1      # event-selection
+DOO2_TRIGSEL=0      # event-selection-service
 # Vertexing
-DOO2_SKIM=1         # hf-track-index-skim-creator
+DOO2_SKIM=0         # hf-track-index-skim-creator
 DOO2_CAND_2PRONG=0  # hf-candidate-creator-2prong
 DOO2_CAND_3PRONG=0  # hf-candidate-creator-3prong
 DOO2_CAND_CASC=0    # hf-candidate-creator-cascade
@@ -68,7 +68,7 @@ DOO2_SEL_DSTAR=0    # hf-candidate-selector-dstar
 DOO2_SEL_TOXIPI=0   # hf-candidate-selector-to-xi-pi
 DOO2_SEL_XIC_XIPIPI=0   # hf-candidate-selector-xic-to-xi-pi-pi
 # Analysis tasks
-DOO2_TASK_D0=0      # hf-task-d0
+DOO2_TASK_D0=1      # hf-task-d0
 DOO2_TASK_DS=0      # hf-task-ds
 DOO2_TASK_DPLUS=0   # hf-task-dplus
 DOO2_TASK_LC=0      # hf-task-lc
@@ -99,7 +99,7 @@ DOO2_DATA_D0=0      # hf-derived-data-creator-d0-to-k-pi
 DOO2_DATA_LC=0      # hf-derived-data-creator-lc-to-p-k-pi
 DOO2_DATA_BPLUS=0   # hf-derived-data-creator-bplus-to-d0-pi
 DOO2_DATA_B0=0      # hf-derived-data-creator-b0-to-d-pi
-DOO2_DATA_DPLUS=1   # hf-derived-data-creator-dplus-to-pi-k-pi
+DOO2_DATA_DPLUS=0   # hf-derived-data-creator-dplus-to-pi-k-pi
 DOO2_DATA_DS=0      # hf-derived-data-creator-ds-to-k-k-pi
 # Correlations
 DOO2_CORR_D0D0BAR_DATA=0       # hf-correlator-d0-d0bar
@@ -126,7 +126,7 @@ DOO2_QA_EVTRK=0     # qa-event-track
 DOO2_MC_VALID=0     # hf-task-mc-validation
 # PID
 DOO2_PID_TPC=0      # pid-tpc
-DOO2_PID_TOF=0      # pid-tof-full/alice3-pid-tof
+DOO2_PID_TOF=0      # pid-tof
 DOO2_PID_TOF_QA=0   # pid-tof-qa-mc
 DOO2_PID_BAYES=0    # pid-bayes
 # Converters (Consider setting these per input case via INPUT_TASK_CONFIG.)
@@ -144,10 +144,10 @@ DOO2_CONV_V0=0         # v0converter
 DOO2_CONV_MFT=0        # mft-tracks-converter
 
 # Selection cuts
-APPLYCUTS_D0=1      # Apply D0 selection cuts.
+APPLYCUTS_D0=0      # Apply D0 selection cuts.
 APPLYCUTS_DS=0      # Apply Ds selection cuts.
 APPLYCUTS_DPLUS=0   # Apply D+ selection cuts.
-APPLYCUTS_LC=1      # Apply Λc selection cuts.
+APPLYCUTS_LC=0      # Apply Λc selection cuts.
 APPLYCUTS_LB=0      # Apply Λb selection cuts.
 APPLYCUTS_XIC=0     # Apply Ξc selection cuts.
 APPLYCUTS_JPSI=0    # Apply J/ψ selection cuts.
@@ -215,9 +215,11 @@ function AdjustJson {
     ReplaceString "\"processMcAll\": \"false\"" "\"processMcAll\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processMC\": \"false\"" "\"processMC\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processMC\": \"0\"" "\"processMC\": \"1\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processMonteCarlo\": \"false\"" "\"processMonteCarlo\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processData\": \"true\"" "\"processData\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processDataStd\": \"true\"" "\"processDataStd\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processDataWithDCAFitterN\": \"true\"" "\"processDataWithDCAFitterN\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processRealData\": \"true\"" "\"processRealData\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
   else
     MsgWarn "Using real data"
     ReplaceString "\"isMC\": \"true\"" "\"isMC\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
@@ -228,9 +230,11 @@ function AdjustJson {
     ReplaceString "\"processMcAll\": \"true\"" "\"processMcAll\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processMC\": \"true\"" "\"processMC\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processMC\": \"1\"" "\"processMC\": \"0\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processMonteCarlo\": \"true\"" "\"processMonteCarlo\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processData\": \"false\"" "\"processData\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processDataStd\": \"false\"" "\"processDataStd\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processDataWithDCAFitterN\": \"false\"" "\"processDataWithDCAFitterN\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processRealData\": \"false\"" "\"processRealData\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
   # event-selection
@@ -244,7 +248,7 @@ function AdjustJson {
   fi
 
   # hf-track-index-skim-creator
-  if [[ $DOO2_CAND_DSTAR -eq 11 ]]; then
+  if [[ $DOO2_CAND_DSTAR -eq 1 ]]; then
     ReplaceString "\"doDstar\": \"false\"" "\"doDstar\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
@@ -450,7 +454,7 @@ function MakeScriptO2 {
 
   WORKFLOWS=""
   # Trigger selection
-  [ $DOO2_TRIGSEL -eq 1 ] && WORKFLOWS+=" o2-analysis-event-selection"
+  [ $DOO2_TRIGSEL -eq 1 ] && WORKFLOWS+=" o2-analysis-event-selection-service${SUFFIX_SKIM}"
   # Vertexing
   [ $DOO2_SKIM -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-track-index-skim-creator${SUFFIX_SKIM}"
   [ $DOO2_CAND_2PRONG -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-candidate-creator-2prong${SUFFIX_DER}"
@@ -549,9 +553,9 @@ function MakeScriptO2 {
   [ $DOO2_QA_EVTRK -eq 1 ] && WORKFLOWS+=" o2-analysis-qa-event-track"
   [ $DOO2_MC_VALID -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-task-mc-validation"
   # PID
-  [ $DOO2_PID_TPC -eq 1 ] && WORKFLOWS+=" o2-analysis-pid-tpc"
+  [ $DOO2_PID_TPC -eq 1 ] && WORKFLOWS+=" o2-analysis-pid-tpc${SUFFIX_RUN}"
   [ $DOO2_PID_BAYES -eq 1 ] && WORKFLOWS+=" o2-analysis-pid-bayes"
-  [ $DOO2_PID_TOF -eq 1 ] && WORKFLOWS+=" o2-analysis-pid-tof-full${SUFFIX_RUN}"
+  [ $DOO2_PID_TOF -eq 1 ] && WORKFLOWS+=" o2-analysis-pid-tof${SUFFIX_RUN}"
   [ $DOO2_PID_TOF_QA -eq 1 ] && WORKFLOWS+=" o2-analysis-pid-tof-qa-mc"
   # Converters
   [ $DOO2_CONV_MC -eq 1 ] && WORKFLOWS+=" o2-analysis-mc-converter"
@@ -599,6 +603,7 @@ function MakeScriptO2 {
 #!/bin/bash
 FileIn="\$1"
 JSON="\$2"
+time \
 $O2EXEC
 EOF
 }
