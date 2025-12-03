@@ -442,7 +442,6 @@ function MakeScriptO2 {
   [[ $DOO2_CAND_CASC -eq 1 || $DOO2_SEL_LCK0SP -eq 1 || $DOO2_TASK_LCK0SP -eq 1 || $DOO2_TREE_LCK0SP -eq 1 ]] && SUFFIX_SKIM="_v0"
   # Ξc0/Ωc0 → Ξ π LF cascade reconstruction
   [[ $DOO2_CAND_XIC0OC0 -eq 1 || $DOO2_SEL_TOXIPI -eq 1 || $DOO2_TREE_TOXIPI -eq 1 || $DOO2_CAND_XIC_XIPIPI -eq 1 || $DOO2_SEL_XIC_XIPIPI -eq 1 || $DOO2_TASK_XIC_XIPIPI -eq 1 || $DOO2_TREE_XIC_XIPIPI -eq 1 ]] && SUFFIX_SKIM="_casc-lf"
-  SUFFIX_SKIM="_casc-lf"
 
   # Suffix to distinguish versions of the same workflow for different runs in the workflow database
   SUFFIX_RUN_MASK="_runX" # suffix mask to be replaced in the workflow names
