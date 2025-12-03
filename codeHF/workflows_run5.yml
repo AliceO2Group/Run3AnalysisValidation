@@ -1,0 +1,114 @@
+---
+workflows:
+  # Candidate creators
+
+  o2-analysis-hf-candidate-creator-x:
+    dependencies: o2-analysis-hf-candidate-selector-jpsi_runX
+    tables:
+      default: [HFCANDXBASE, DYN/HFCANDXEXT]
+      mc: [HFCANDXMCREC, HFCANDXMCGEN]
+
+  o2-analysis-hf-candidate-creator-chic:
+    dependencies: o2-analysis-hf-candidate-selector-jpsi_runX
+    tables:
+      default: [HFCANDCHICBASE, DYN/HFCANDCHICEXT]
+      mc: [HFCANDCHICMCREC, HFCANDCHICMCGEN]
+
+  o2-analysis-hf-candidate-creator-xicc:
+    dependencies: o2-analysis-hf-candidate-selector-xic-to-p-k-pi
+    requires_mc: yes
+    options:
+      mc: "--doMC"
+    tables:
+      default: [HFCANDXICCBASE, DYN/HFCANDXICCEXT]
+      mc: [HFCANDXICCMCREC, HFCANDXICCMCGEN]
+
+  # Selectors
+
+  o2-analysis-hf-candidate-selector-jpsi_run3: &selector_jpsi
+    # <<: *selector_2prong
+    executable: o2-analysis-hf-candidate-selector-jpsi
+    tables: HFSELJPSI
+
+  o2-analysis-hf-candidate-selector-jpsi_run2:
+    <<: *selector_jpsi
+
+  o2-analysis-hf-candidate-selector-jpsi_run5:
+    <<: *selector_jpsi
+    options: --isAlice3
+
+  o2-analysis-hf-candidate-selector-x-to-jpsi-pi-pi:
+    dependencies: o2-analysis-hf-candidate-creator-x
+    tables: HFSELX
+
+  o2-analysis-hf-candidate-selector-chic-to-jpsi-gamma:
+    dependencies: o2-analysis-hf-candidate-creator-chic
+    tables: HFSELCHIC
+
+  o2-analysis-hf-candidate-selector-xicc-to-p-k-pi-pi:
+    dependencies: o2-analysis-hf-candidate-creator-xicc
+    requires_mc: yes
+    tables: HFSELXICC
+
+  # Analysis tasks
+
+  o2-analysis-hf-task-jpsi:
+    options:
+      mc: "--doMC"
+    dependencies: o2-analysis-hf-candidate-selector-jpsi_runX
+
+  o2-analysis-hf-task-x:
+    options:
+      mc: "--doMC"
+    dependencies: o2-analysis-hf-candidate-selector-x-to-jpsi-pi-pi
+
+  o2-analysis-hf-task-chic:
+    options:
+      mc: "--doMC"
+    dependencies: o2-analysis-hf-candidate-selector-chic-to-jpsi-gamma
+
+  o2-analysis-hf-task-xicc:
+    requires_mc: yes
+    options:
+      mc: "--doMC"
+    dependencies: o2-analysis-hf-candidate-selector-xicc-to-p-k-pi-pi
+
+  # Tree creators
+
+  o2-analysis-hf-tree-creator-x-to-jpsi-pi-pi:
+    requires_mc: yes
+    dependencies: o2-analysis-hf-candidate-selector-x-to-jpsi-pi-pi
+    tables: [HFCANDXFULL, HFCANDXFULLEV, HFCANDXFULLP]
+
+  o2-analysis-hf-tree-creator-chic-to-jpsi-gamma:
+    requires_mc: yes
+    dependencies: o2-analysis-hf-candidate-selector-chic-to-jpsi-gamma
+    tables: [HFCANDCHICFULL, HFCANDCHICFULLE, HFCANDCHICFULLP]
+
+  o2-analysis-hf-tree-creator-xicc-to-p-k-pi-pi:
+    requires_mc: yes
+    dependencies: o2-analysis-hf-candidate-selector-xicc-to-p-k-pi-pi
+    tables: [HFCANDXICCFULL, HFCANDXICCFULLE, HFCANDXICCFULLP]
+
+  # QA
+
+  o2-analysis-hf-task-qa-pid-rejection:
+    requires_mc: yes
+    dependencies: [o2-analysis-hf-track-index-skim-creator_skimX, o2-analysis-pid-tpc_runX, o2-analysis-pid-tof_runX]
+
+  # Helper tasks
+
+  o2-analysis-trackselection_run5:
+    executable: o2-analysis-alice3-trackselection
+
+  o2-analysis-track-dca_run5:
+    executable: o2-analysis-alice3-trackextension
+
+  o2-analysis-centrality_run5:
+    executable: o2-analysis-alice3-centrality
+    dependencies: o2-analysis-track-dca_run5
+
+  # PID
+
+  o2-analysis-pid-tof_run5:
+    executable: o2-analysis-alice3-pid-tof
