@@ -48,7 +48,6 @@ workflows:
       - o2-analysis-track-dca_runX
       - o2-analysis-trackselection_runX
       - o2-analysis-track-to-collision-associator
-      - o2-analysis-lf-lambdakzerobuilder
 
   o2-analysis-hf-track-index-skim-creator_casc-lf:
     <<: *skim_creator
@@ -56,8 +55,6 @@ workflows:
       - o2-analysis-track-dca_runX
       - o2-analysis-trackselection_runX
       - o2-analysis-track-to-collision-associator
-      - o2-analysis-lf-lambdakzerobuilder
-      - o2-analysis-lf-cascadebuilder
 
   # Candidate creators
 
@@ -116,7 +113,6 @@ workflows:
       - o2-analysis-hf-pid-creator
       - o2-analysis-pid-tof_runX
       - o2-analysis-pid-tpc_runX
-      - o2-analysis-lf-lambdakzerobuilder
     tables:
       default: [HFCANDCASCBASE, DYN/HFCANDCASCEXT]
       mc: [HFCANDCASCMCREC, HFCANDCASCMCGEN]
@@ -130,7 +126,6 @@ workflows:
       - o2-analysis-hf-pid-creator
       - o2-analysis-pid-tof_runX
       - o2-analysis-pid-tpc_runX
-      - o2-analysis-lf-lambdakzerobuilder
 
   o2-analysis-hf-candidate-creator-x:
     dependencies: o2-analysis-hf-candidate-selector-jpsi_runX
@@ -181,8 +176,6 @@ workflows:
       - o2-analysis-hf-pid-creator
       - o2-analysis-pid-tof_runX
       - o2-analysis-pid-tpc_runX
-      - o2-analysis-lf-lambdakzerobuilder
-      - o2-analysis-lf-cascadebuilder
     tables:
       default: [HFCANDTOXIPI, HFCANDTOOMEGAPI, HFCANDTOOMEGAK]
       mc: [HFXICXIPIMCREC, HFOMCXIPIMCREC, HFTOOMEPIMCREC, HFTOOMEKMCREC, HFXICXIPIMCGEN, HFOMECXIPIMCGEN, HFTOOMEPIMCGEN, HFTOOMEKMCGEN]
@@ -195,8 +188,6 @@ workflows:
       - o2-analysis-hf-pid-creator
       - o2-analysis-pid-tof_runX
       - o2-analysis-pid-tpc_runX
-      - o2-analysis-lf-lambdakzerobuilder
-      - o2-analysis-lf-cascadebuilder
 
   o2-analysis-hf-candidate-creator-xic-to-xi-pi-pi: &cand_creator_xic-to-xi-pi-pi
     <<: *cand_creator_2p
@@ -208,8 +199,6 @@ workflows:
       - o2-analysis-hf-pid-creator
       - o2-analysis-pid-tof_runX
       - o2-analysis-pid-tpc_runX
-      - o2-analysis-lf-lambdakzerobuilder
-      - o2-analysis-lf-cascadebuilder
     tables: []
 
   o2-analysis-hf-candidate-creator-xic-to-xi-pi-pi_derived:
@@ -220,8 +209,6 @@ workflows:
       - o2-analysis-hf-pid-creator
       - o2-analysis-pid-tof_runX
       - o2-analysis-pid-tpc_runX
-      - o2-analysis-lf-lambdakzerobuilder
-      - o2-analysis-lf-cascadebuilder
 
   # Selectors
 
@@ -761,11 +748,3 @@ workflows:
   o2-analysis-v0converter: {}
 
   o2-analysis-mft-tracks-converter: {}
-
-  # LF
-
-  o2-analysis-lf-lambdakzerobuilder:
-    dependencies: [o2-analysis-event-selection-service_runX, o2-analysis-track-dca_runX, o2-analysis-pid-tpc_runX]
-
-  o2-analysis-lf-cascadebuilder:
-    dependencies: [o2-analysis-event-selection-service_runX, o2-analysis-track-dca_runX, o2-analysis-pid-tpc_runX]
