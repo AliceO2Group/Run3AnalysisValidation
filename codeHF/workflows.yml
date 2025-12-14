@@ -485,6 +485,8 @@ workflows:
 
   o2-analysis-je-jet-deriveddata-producer: {}
 
+  o2-analysis-je-estimator-rho: {}
+
   o2-analysis-je-jet-finder-d0-data-charged: &jethf
     dependencies:
       - o2-analysis-hf-derived-data-creator-d0-to-k-pi
@@ -528,7 +530,7 @@ workflows:
 
   o2-analysis-je-jet-substructure-d0-output_data:
     executable: o2-analysis-je-jet-substructure-d0-output
-    dependencies: o2-analysis-je-jet-substructure-d0_data
+    dependencies: [o2-analysis-je-jet-substructure-d0_data, o2-analysis-je-estimator-rho]
     tables: [D0O, D0SSO]
 
   o2-analysis-je-jet-substructure-d0-output_mc:
