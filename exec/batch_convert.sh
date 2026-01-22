@@ -19,7 +19,6 @@ DIR_THIS="$(dirname "$(realpath "$0")")"
 # shellcheck disable=SC1091 # Ignore not following.
 source "$DIR_THIS/utilities.sh" || { echo "Error: Failed to load utilities."; exit 1; }
 
-
 LogFile="log_convert.log"
 ListIn="list_convert.txt"
 IndexFile=0

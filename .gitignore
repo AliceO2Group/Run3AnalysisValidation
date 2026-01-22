@@ -6,3 +6,9 @@ megalinter-reports/
 .DS_Store
 .mypy_cache/
 github_conf/
+output_*
+list_*.txt
+script_*.sh
+ListOutToMerge*.txt
+dpl-config*_edit.json
+workflows_edit.yml
