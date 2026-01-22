@@ -316,8 +316,8 @@
         "skipMBGapEvents": "true",
         "thresholdClusterEnergyMin": "0",
         "thresholdTriggerTrackPtMin": "0",
-        "trackEtaMax": "0.899999976",
-        "trackEtaMin": "-0.899999976",
+        "trackEtaMax": "0.9",
+        "trackEtaMin": "-0.9",
         "trackOccupancyInTimeRangeMax": "999999",
         "trackPhiMax": "99",
         "trackPhiMin": "-99",
@@ -8769,7 +8769,7 @@
         "jetPtMinMCP": "0",
         "jetRadii": {
             "values": [
-                "0.40000000000000002"
+                "0.4"
             ]
         },
         "processClearMaps": "true",
@@ -8790,8 +8790,8 @@
         "processOutputJetsMCP": "false",
         "processOutputSubstructureMatchingData": "false",
         "processOutputSubstructureMatchingMC": "false",
-        "trackEtaMax": "0.899999976",
-        "trackEtaMin": "-0.899999976"
+        "trackEtaMax": "0.9",
+        "trackEtaMin": "-0.9"
     },
     "lambdakzero-builder": {
         "axisConfigurations": {
