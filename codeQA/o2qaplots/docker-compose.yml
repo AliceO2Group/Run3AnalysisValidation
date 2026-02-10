@@ -1,9 +1,0 @@
-version: "3.7"
-
-services:
-  plotting:
-    build:
-      context: .
-    volumes:
-      - .:/o2qaplots/
-    tty: true
