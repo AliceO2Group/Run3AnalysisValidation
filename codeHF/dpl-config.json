@@ -6562,8 +6562,8 @@
         "processMcWithKFParticle": "false",
         "processMcWithKFParticleMl": "false",
         "selectionCand": "1",
-        "selectionFlagD0": "1",
-        "selectionFlagD0bar": "1",
+        "selectionFlagD0": "0",
+        "selectionFlagD0bar": "0",
         "selectionFlagHf": "1",
         "selectionPid": "1",
         "selectionTopol": "1",
@@ -7201,7 +7201,7 @@
         "processMcWithMl": "false",
         "processMcWithMlWithFT0C": "false",
         "processMcWithMlWithFT0M": "false",
-        "selectionFlagLc": "1",
+        "selectionFlagLc": "0",
         "storeOccupancy": "true",
         "thnAxisRapidity": {
             "values": [
@@ -7502,7 +7502,7 @@
         "processWithKFParticle": "false",
         "processWithKFParticleAndML": "false",
         "ptTrackMin": "0.1",
-        "selectionFlagXic": "1",
+        "selectionFlagXic": "0",
         "thnConfigAxisBdtScoreBkg": {
             "values": [
                 "100",
