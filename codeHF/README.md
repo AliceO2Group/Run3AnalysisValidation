@@ -51,7 +51,3 @@ bash runtest.sh
 Running all the steps with `INPUT_CASE=2` takes about 40 seconds in total.
 
 The postprocessing step produces several plots `comparison_histos_(...).pdf`, `MC_(...).pdf`.
-
-To confirm that the output of the default settings looks as expected, compare the produced plots with their reference counterparts `(...)_ref.pdf`.
-
-The complete list of commit hashes used to produce the reference plots can be found in `versions_ref.txt`.
