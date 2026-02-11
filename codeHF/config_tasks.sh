@@ -168,12 +168,14 @@ function AdjustJson {
   cp "$JSON" "$JSON_EDIT" || ErrExit "Failed to cp $JSON $JSON_EDIT."
   JSON="$JSON_EDIT"
 
-  # Collision system
+  # Collision system (pp, PbPb)
   MsgWarn "Setting collision system $INPUT_SYS"
+  ReplaceString "\"syst\": \"pp\"" "\"syst\": \"$INPUT_SYS\"" "$JSON" || ErrExit "Failed to edit $JSON."  # event-selection
 
-  # Run 2/3/5
+  # LHC Run (2, 3, 5)
   MsgWarn "Using Run $INPUT_RUN"
   if [ "$INPUT_RUN" -eq 2 ]; then
+    ReplaceString "\"isRun2\": \"false\"" "\"isRun2\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."  # hf-track-index-skim-creator..., hf-candidate-creator-...
     ReplaceString "\"processRun2\": \"false\"" "\"processRun2\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"true\"" "\"processRun3\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun2BetaM\": \"false\"" "\"processRun2BetaM\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
@@ -181,6 +183,7 @@ function AdjustJson {
     ReplaceString "\"processRun2\": \"0\"" "\"processRun2\": \"1\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"1\"" "\"processRun3\": \"0\"" "$JSON" || ErrExit "Failed to edit $JSON."
   elif [ "$INPUT_RUN" -eq 3 ]; then
+    ReplaceString "\"isRun2\": \"true\"" "\"isRun2\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."  # hf-track-index-skim-creator..., hf-candidate-creator-...
     ReplaceString "\"processRun2\": \"true\"" "\"processRun2\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"false\"" "\"processRun3\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun2BetaM\": \"true\"" "\"processRun2BetaM\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
@@ -188,8 +191,14 @@ function AdjustJson {
     ReplaceString "\"processRun2\": \"1\"" "\"processRun2\": \"0\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"0\"" "\"processRun3\": \"1\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
+  # track-selection
+  if [ "$INPUT_RUN" -eq 3 ]; then
+    ReplaceString "\"isRun3\": \"false\"" "\"isRun3\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
+  else
+    ReplaceString "\"isRun3\": \"true\"" "\"isRun3\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
+  fi
 
-  # MC
+  # Data type (real, MC)
   if [ "$INPUT_IS_MC" -eq 1 ]; then
     MsgWarn "Using MC data"
     ReplaceString "\"isMC\": \"false\"" "\"isMC\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
@@ -222,45 +231,31 @@ function AdjustJson {
     ReplaceString "\"processRealData\": \"false\"" "\"processRealData\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
-  # event-selection
-  ReplaceString "\"syst\": \"pp\"" "\"syst\": \"$INPUT_SYS\"" "$JSON" || ErrExit "Failed to edit $JSON."
-
-  # hf-track-index-skim-creator-tag-sel-collisions
+  # trigger selection
   if [ $DOO2_TRIGSEL -eq 1 ]; then
-    # trigger selection
+    # hf-track-index-skim-creator-tag-sel-collisions
     ReplaceString "\"processTrigSel\": \"false\"" "\"processTrigSel\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processNoTrigSel\": \"true\"" "\"processNoTrigSel\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
-  # hf-track-index-skim-creator
+  # D*+
   if [[ $DOO2_CAND_DSTAR -eq 1 ]]; then
+    # hf-track-index-skim-creator
     ReplaceString "\"doDstar\": \"false\"" "\"doDstar\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
-  # hf-track-index-skim-creator-cascades
+  # Λc → K0S p
   if [[ $DOO2_CAND_CASC -eq 1 || $DOO2_SEL_LCK0SP -eq 1 || $DOO2_TASK_LCK0SP -eq 1 || $DOO2_TREE_LCK0SP -eq 1 ]]; then
+    # hf-track-index-skim-creator-cascades
     ReplaceString "\"processCascades\": \"false\"" "\"processCascades\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processNoCascades\": \"true\"" "\"processNoCascades\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
-  # hf-track-index-skim-creator-lf-cascades
+  # Ξc0, Ωc0, Ξc+
   if [[ $DOO2_CAND_XIC0OC0 -eq 1 || $DOO2_SEL_TOXIPI -eq 1 || $DOO2_TREE_TOXIPI -eq 1 || $DOO2_CAND_XIC_XIPIPI -eq 1 || $DOO2_SEL_XIC_XIPIPI -eq 1 || $DOO2_TASK_XIC_XIPIPI -eq 1 || $DOO2_TREE_XIC_XIPIPI -eq 1 ]]; then
+    # hf-track-index-skim-creator-lf-cascades
     ReplaceString "\"processLfCascades\": \"false\"" "\"processLfCascades\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processNoLfCascades\": \"true\"" "\"processNoLfCascades\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  fi
-
-  # timestamp-task
-  if [[ "$INPUT_IS_MC" -eq 1 && "$INPUT_RUN" -eq 2 ]]; then
-    ReplaceString "\"isRun2MC\": \"false\"" "\"isRun2MC\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  else
-    ReplaceString "\"isRun2MC\": \"true\"" "\"isRun2MC\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  fi
-
-  # track-selection
-  if [ "$INPUT_RUN" -eq 3 ]; then
-    ReplaceString "\"isRun3\": \"false\"" "\"isRun3\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  else
-    ReplaceString "\"isRun3\": \"true\"" "\"isRun3\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
   # tracks-extra-v002-converter
@@ -272,41 +267,7 @@ function AdjustJson {
     ReplaceString "\"processV001ToV002\": \"false\"" "\"processV001ToV002\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
-  # lambdakzero-builder
-  if [ "$INPUT_RUN" -eq 2 ]; then
-    ReplaceString "\"isRun2\": \"0\"" "\"isRun2\": \"1\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  else
-    ReplaceString "\"isRun2\": \"1\"" "\"isRun2\": \"0\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  fi
-
-  # hf-track-index-skim-creator..., hf-candidate-creator-...
-  if [ "$INPUT_RUN" -eq 2 ]; then
-    ReplaceString "\"isRun2\": \"false\"" "\"isRun2\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  else
-    ReplaceString "\"isRun2\": \"true\"" "\"isRun2\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  fi
-
-  # tof-event-time
-  if [ "$INPUT_RUN" -eq 3 ]; then
-    ReplaceString "\"processFT0\": \"false\"" "\"processFT0\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
-    ReplaceString "\"processNoFT0\": \"true\"" "\"processNoFT0\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-    ReplaceString "\"processOnlyFT0\": \"true\"" "\"processOnlyFT0\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  else
-    ReplaceString "\"processFT0\": \"true\"" "\"processFT0\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-    ReplaceString "\"processNoFT0\": \"true\"" "\"processNoFT0\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-    ReplaceString "\"processOnlyFT0\": \"true\"" "\"processOnlyFT0\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  fi
-
-  # hf-task-flow
-  if [ "$INPUT_RUN" -eq 3 ]; then
-    ReplaceString "\"processSameRun3\": \"false\"" "\"processSameRun3\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
-    ReplaceString "\"processSameRun2\": \"true\"" "\"processSameRun2\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  else
-    ReplaceString "\"processSameRun3\": \"true\"" "\"processSameRun3\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
-    ReplaceString "\"processSameRun2\": \"false\"" "\"processSameRun2\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
-  fi
-
-  # jet-finder-charged-d0-qa
+  # jet-finder-...
   if [ "$INPUT_IS_MC" -eq 1 ]; then
     ReplaceString "\"processJetsData\": \"true\"" "\"processJetsData\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
   else
@@ -314,7 +275,7 @@ function AdjustJson {
     ReplaceString "\"processJetsMCP\": \"true\"" "\"processJetsMCP\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
 
-  # jet-substructure...
+  # jet-substructure-...
   if [ "$INPUT_IS_MC" -eq 1 ]; then
     ReplaceString "\"processChargedJetsHF_data\": \"true\"" "\"processChargedJetsHF_data\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processOutput_data\": \"true\"" "\"processOutput_data\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
