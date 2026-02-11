@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck disable=SC2034 # Ignore unused parameters.
 
-# Configuration of tasks for runtest.sh
+# Configuration of tasks for run_analysis.sh
 # (Cleans directory, modifies step activation, modifies JSON, generates step scripts.)
 
 # Mandatory functions:

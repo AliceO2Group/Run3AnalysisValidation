@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck disable=SC2034 # Ignore unused parameters.
 
-# Input specification for runtest.sh
+# Input specification for run_analysis.sh
 # (Modifies input parameters.)
 
 INPUT_CASE=1            # Input case
