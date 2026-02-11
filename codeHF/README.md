@@ -48,6 +48,4 @@ Enter the `codeHF` directory and execute the steering script:
 bash runtest.sh
 ```
 
-Running all the steps with `INPUT_CASE=2` takes about 40 seconds in total.
-
 The postprocessing step produces several plots `comparison_histos_(...).pdf`, `MC_(...).pdf`.

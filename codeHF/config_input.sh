@@ -28,12 +28,6 @@ NJOBSPARALLEL_O2=$(python3 -c "print(min(10, round($(nproc) / 2)))")
 # INPUT_TASK_CONFIG=""            # Input-specific task configuration (e.g. enabling converters), overriding the task configuration in CONFIG_TASKS. String of space-separated commands.
 # JSON="dpl-config.json"          # O2 device configuration
 
-# O2 device configuration
-JSONRUN3="dpl-config_run3.json"              # Run 3
-# JSONRUN5_HF="dpl-config_run5_hf.json"        # Run 5, open HF
-# JSONRUN5_ONIAX="dpl-config_run5_oniaX.json"  # Run 5, onia (J/psi and X), (higher pt cut on 2-prong decay tracks and no DCA cut on single track)
-JSON="$JSONRUN3"
-
 INPUT_BASE="/data2/data" # alicecerno2
 
 case $INPUT_CASE in

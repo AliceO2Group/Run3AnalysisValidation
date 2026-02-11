@@ -176,11 +176,15 @@ function AdjustJson {
   if [ "$INPUT_RUN" -eq 2 ]; then
     ReplaceString "\"processRun2\": \"false\"" "\"processRun2\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"true\"" "\"processRun3\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processRun2BetaM\": \"false\"" "\"processRun2BetaM\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processRun3BetaM\": \"true\"" "\"processRun3BetaM\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun2\": \"0\"" "\"processRun2\": \"1\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"1\"" "\"processRun3\": \"0\"" "$JSON" || ErrExit "Failed to edit $JSON."
   elif [ "$INPUT_RUN" -eq 3 ]; then
     ReplaceString "\"processRun2\": \"true\"" "\"processRun2\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"false\"" "\"processRun3\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processRun2BetaM\": \"true\"" "\"processRun2BetaM\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
+    ReplaceString "\"processRun3BetaM\": \"false\"" "\"processRun3BetaM\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun2\": \"1\"" "\"processRun2\": \"0\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processRun3\": \"0\"" "\"processRun3\": \"1\"" "$JSON" || ErrExit "Failed to edit $JSON."
   fi
