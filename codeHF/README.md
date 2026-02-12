@@ -45,9 +45,7 @@ You can use the [`download_from_grid.sh`](../exec/download_from_grid.sh) script 
 Enter the `codeHF` directory and execute the steering script:
 
 ```bash
-bash runtest.sh
+./run_analysis.sh
 ```
-
-Running all the steps with `INPUT_CASE=2` takes about 40 seconds in total.
 
 The postprocessing step produces several plots `comparison_histos_(...).pdf`, `MC_(...).pdf`.

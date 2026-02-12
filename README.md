@@ -38,7 +38,7 @@ The validation framework is a general configurable platform that gives user the 
 Its flexibility is enabled by strict separation of its specialised components into a system of Bash scripts.
 Configuration is separate from execution code, input configuration is separate from task configuration, execution steps are separate from the main steering code.
 
-* The steering script [`runtest.sh`](exec/runtest.sh) provides control parameters and interface to the machinery for task execution.
+* The steering script [`run_analysis.sh`](exec/run_analysis.sh) provides control parameters and interface to the machinery for task execution.
 * User provides configuration Bash scripts which:
   * modify control parameters,
   * produce modified configuration files,
@@ -50,7 +50,7 @@ Execution code can be found in the [`exec`](exec) directory.
 
 **The user should not touch anything in this directory!**
 
-The steering script [`runtest.sh`](exec/runtest.sh) performs the following execution steps:
+The steering script [`run_analysis.sh`](exec/run_analysis.sh) performs the following execution steps:
 
 * Load input specification.
 * Load tasks configuration.
@@ -85,10 +85,10 @@ All steps are activated by default and some can be disabled individually by sett
 
 ## Configuration
 
-The steering script [`runtest.sh`](exec/runtest.sh) can be executed with the following optional arguments:
+The steering script [`run_analysis.sh`](exec/run_analysis.sh) can be executed with the following optional arguments:
 
 ```bash
-bash [<path>/]runtest.sh [-h] [-i <input-configuration>] [-t <task-configuration>] [-d]
+[<path>/]run_analysis.sh [-h] [-i <input-configuration>] [-t <task-configuration>] [-d]
 ```
 
 `<input-configuration>` Input specification script. See [Input specification](#input-specification).
@@ -227,7 +227,7 @@ Now you are ready to run the validation code.
 **Make sure that your Bash environment is clean!
 Do not load ROOT, AliPhysics, O<sup>2</sup>, O<sup>2</sup>Physics or any other aliBuild package environment before running the framework!**
 
-Enter any directory and execute the steering script `runtest.sh`.
+Enter any directory and execute the steering script `run_analysis.sh`.
 (You can create a symlink for convenience.)
 All the processing will take place in the current directory.
 
@@ -264,7 +264,7 @@ which can help you figure out what went wrong, where and why.
 You can execute the script from the current working directory using the following syntax (options can be combined):
 
 ```bash
-bash [<path>/]debug.sh [-h] [-t TYPE] [-b [-u]] [-f] [-w] [-e]
+[<path>/]debug.sh [-h] [-t TYPE] [-b [-u]] [-f] [-w] [-e]
 ```
 
 `-h` Print out the usage help.
@@ -306,7 +306,7 @@ as well as re-building your AliPhysics and O<sup>2</sup>(Physics) installations 
 You can execute the script from any directory on your system using the following syntax:
 
 ```bash
-python [<path>/]exec/update_packages.py [-h] [-d] [-l] [-c] database
+[<path>/]exec/update_packages.py [-h] [-d] [-l] [-c] database
 ```
 
 optional arguments:
@@ -353,7 +353,7 @@ It is possible to check your code locally (before even committing or pushing):
 ### Space checker
 
 ```bash
-bash [<path>/]exec/check_spaces.sh
+[<path>/]exec/check_spaces.sh
 ```
 
 ### [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html)
