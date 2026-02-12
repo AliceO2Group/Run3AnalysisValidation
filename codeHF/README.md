@@ -45,7 +45,7 @@ You can use the [`download_from_grid.sh`](../exec/download_from_grid.sh) script 
 Enter the `codeHF` directory and execute the steering script:
 
 ```bash
-bash run_analysis.sh
+./run_analysis.sh
 ```
 
 The postprocessing step produces several plots `comparison_histos_(...).pdf`, `MC_(...).pdf`.

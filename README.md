@@ -88,7 +88,7 @@ All steps are activated by default and some can be disabled individually by sett
 The steering script [`run_analysis.sh`](exec/run_analysis.sh) can be executed with the following optional arguments:
 
 ```bash
-bash [<path>/]run_analysis.sh [-h] [-i <input-configuration>] [-t <task-configuration>] [-d]
+[<path>/]run_analysis.sh [-h] [-i <input-configuration>] [-t <task-configuration>] [-d]
 ```
 
 `<input-configuration>` Input specification script. See [Input specification](#input-specification).
@@ -264,7 +264,7 @@ which can help you figure out what went wrong, where and why.
 You can execute the script from the current working directory using the following syntax (options can be combined):
 
 ```bash
-bash [<path>/]debug.sh [-h] [-t TYPE] [-b [-u]] [-f] [-w] [-e]
+[<path>/]debug.sh [-h] [-t TYPE] [-b [-u]] [-f] [-w] [-e]
 ```
 
 `-h` Print out the usage help.
@@ -306,7 +306,7 @@ as well as re-building your AliPhysics and O<sup>2</sup>(Physics) installations 
 You can execute the script from any directory on your system using the following syntax:
 
 ```bash
-python [<path>/]exec/update_packages.py [-h] [-d] [-l] [-c] database
+[<path>/]exec/update_packages.py [-h] [-d] [-l] [-c] database
 ```
 
 optional arguments:
@@ -353,7 +353,7 @@ It is possible to check your code locally (before even committing or pushing):
 ### Space checker
 
 ```bash
-bash [<path>/]exec/check_spaces.sh
+[<path>/]exec/check_spaces.sh
 ```
 
 ### [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html)
