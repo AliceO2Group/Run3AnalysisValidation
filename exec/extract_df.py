@@ -1,13 +1,12 @@
+#!/usr/bin/env python3
+
 """
-Script to extract data frames from AO2D.root files with information about parent files
+Extract data frames from AO2D.root files with information about parent files.
 """
 
 import sys
 
 from ROOT import TFile, TObject  # pylint: disable=import-error
-
-# print(f"Name of the script      : {sys.argv[0]=}")
-# print(f"Arguments of the script : {sys.argv[1:]=}")
 
 # DF range
 df_first = 0
@@ -44,10 +43,7 @@ for f in sys.argv[1:]:
                     if not obj_sub:
                         continue
                     print(f"Writing object {key_name}/{key_sub_name}")
-                    if obj_sub.ClassName() == "TTree":
-                        res = obj_sub.CloneTree().Write()
-                    else:
-                        res = obj_sub.Write()
+                    res = obj_sub.CloneTree().Write() if obj_sub.ClassName() == "TTree" else obj_sub.Write()
                     if not res:
                         print(f"Failed to write {key_name}/{key_sub_name}")
             df_i += 1
