@@ -3938,6 +3938,123 @@
         "usePidTpcAndTof": "false",
         "useTriggerMassCut": "false"
     },
+    "hf-candidate-selector-jpsi": {
+        "binsPt": {
+            "values": [
+                "0",
+                "0.5",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "7",
+                "10",
+                "15"
+            ]
+        },
+        "cuts": {
+            "labels_cols": [
+                "m",
+                "DCA_xy",
+                "DCA_z",
+                "pT El",
+                "chi2PCA"
+            ],
+            "labels_rows": [
+                "pT bin 0",
+                "pT bin 1",
+                "pT bin 2",
+                "pT bin 3",
+                "pT bin 4",
+                "pT bin 5",
+                "pT bin 6",
+                "pT bin 7",
+                "pT bin 8"
+            ],
+            "values": [
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ],
+                [
+                    "0.5",
+                    "0.2",
+                    "0.4",
+                    "1",
+                    "1"
+                ]
+            ]
+        },
+        "nSigmaRichCombinedTofMax": "5",
+        "nSigmaRichMax": "3",
+        "nSigmaTofCombinedMax": "5",
+        "nSigmaTofMax": "3",
+        "nSigmaTpcMax": "3",
+        "processAlice2": "true",
+        "processAlice3": "false",
+        "ptCandMax": "50",
+        "ptCandMin": "0",
+        "ptPidRichMax": "10",
+        "ptPidRichMin": "0.15",
+        "ptPidTofMax": "5",
+        "ptPidTofMin": "0.15",
+        "ptPidTpcMax": "10",
+        "ptPidTpcMin": "0.15",
+        "selectENotPi": "true"
+    },
     "hf-candidate-selector-lb-to-lc-pi": {
         "binsPt": {
             "values": [
@@ -6740,6 +6857,29 @@
         "selectionFlagD0bar": "0",
         "yCandMax": "1",
         "zVertexMax": "10"
+    },
+    "hf-task-jpsi": {
+        "binsPt": {
+            "values": [
+                "0",
+                "0.5",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "7",
+                "10",
+                "15"
+            ]
+        },
+        "modeJpsiToMuMu": "false",
+        "selectedMid": "false",
+        "selectedRich": "false",
+        "selectedTof": "false",
+        "selectedTofRich": "false",
+        "selectionFlagJpsi": "0",
+        "yCandMax": "-1"
     },
     "hf-task-lb": {
         "DCALengthParameter": "0.02",
