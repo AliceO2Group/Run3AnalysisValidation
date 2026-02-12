@@ -129,15 +129,15 @@ DOO2_CONV_V0=0         # v0converter
 DOO2_CONV_MFT=0        # mft-tracks-converter
 
 # Selection cuts
-APPLYCUTS_D0=0      # Apply D0 selection cuts.
-APPLYCUTS_DS=0      # Apply Ds selection cuts.
-APPLYCUTS_DPLUS=0   # Apply D+ selection cuts.
-APPLYCUTS_LC=0      # Apply Λc selection cuts.
-APPLYCUTS_LB=0      # Apply Λb selection cuts.
-APPLYCUTS_XIC=0     # Apply Ξc selection cuts.
-APPLYCUTS_LCK0SP=0  # Apply Λc → K0S p selection cuts.
-APPLYCUTS_B0=0      # Apply B0 selection cuts.
-APPLYCUTS_BPLUS=0   # Apply B+ selection cuts.
+APPLYCUTS_D0=1      # Apply D0 selection cuts.
+APPLYCUTS_DS=1      # Apply Ds selection cuts.
+APPLYCUTS_DPLUS=1   # Apply D+ selection cuts.
+APPLYCUTS_LC=1      # Apply Λc selection cuts.
+APPLYCUTS_LB=1      # Apply Λb selection cuts.
+APPLYCUTS_XIC=1     # Apply Ξc selection cuts.
+APPLYCUTS_LCK0SP=1  # Apply Λc → K0S p selection cuts.
+APPLYCUTS_B0=1      # Apply B0 selection cuts.
+APPLYCUTS_BPLUS=1   # Apply B+ selection cuts.
 
 SAVETREES=0         # Save O2 tables to trees.
 USEO2VERTEXER=1     # Use the O2 vertexer in AliPhysics.
