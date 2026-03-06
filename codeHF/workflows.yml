@@ -365,6 +365,19 @@ workflows:
       - o2-analysis-pid-tpc_runX
     tables: [HFLCCOLLBASE, HFLCCOLLID, HFLCMCCOLLBASE, HFLCMCCOLLID, HFLCMCRCOLLID, HFLCBASE, HFLCPAR, HFLCPARE, HFLCSEL, HFLCML, HFLCID, HFLCMC, HFLCPBASE, HFLCPID]
 
+  o2-analysis-hf-derived-data-creator-lc-to-k0s-p:
+    dependencies:
+      - o2-analysis-hf-candidate-selector-lc-to-k0s-p
+      - o2-analysis-hf-candidate-creator-cascade
+      - o2-analysis-hf-pid-creator
+      - o2-analysis-centrality_runX
+      - o2-analysis-lf-mc-centrality
+      - o2-analysis-multiplicity-table_runX
+      - o2-analysis-track-dca_runX
+      - o2-analysis-pid-tof_runX
+      - o2-analysis-pid-tpc_runX
+    tables: [HFLCCCOLLBASE, HFLCCCOLLID, HFLCCMCCOLLBASE, HFLCCMCCOLLID, HFLCCMCRCOLLID, HFLCCBASE, HFLCTOK0SPPAR, HFLCTOK0SPPARE, HFLCCSEL, HFLCTOK0SPML, HFLCCID, HFLCTOK0SPMC, HFLCCPBASE, HFLCCPID]
+
   o2-analysis-hf-derived-data-creator-dplus-to-pi-k-pi:
     dependencies:
       - o2-analysis-hf-candidate-selector-dplus-to-pi-k-pi

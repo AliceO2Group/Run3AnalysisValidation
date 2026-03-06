@@ -87,6 +87,7 @@ DOO2_DATA_BPLUS=0   # hf-derived-data-creator-bplus-to-d0-pi
 DOO2_DATA_B0=0      # hf-derived-data-creator-b0-to-d-pi
 DOO2_DATA_DPLUS=0   # hf-derived-data-creator-dplus-to-pi-k-pi
 DOO2_DATA_DS=0      # hf-derived-data-creator-ds-to-k-k-pi
+DOO2_DATA_LCK0SP=0  # hf-derived-data-creator-lc-to-k0s-p
 # Correlations
 DOO2_CORR_D0D0BAR_DATA=0       # hf-correlator-d0-d0bar
 DOO2_CORR_D0D0BAR_MCREC=0      # hf-correlator-d0-d0bar_mc-rec
@@ -245,7 +246,7 @@ function AdjustJson {
   fi
 
   # Λc → K0S p
-  if [[ $DOO2_CAND_CASC -eq 1 || $DOO2_SEL_LCK0SP -eq 1 || $DOO2_TASK_LCK0SP -eq 1 || $DOO2_TREE_LCK0SP -eq 1 ]]; then
+  if [[ $DOO2_CAND_CASC -eq 1 || $DOO2_SEL_LCK0SP -eq 1 || $DOO2_TASK_LCK0SP -eq 1 || $DOO2_TREE_LCK0SP -eq 1 || $DOO2_DATA_LCK0SP -eq 1 ]]; then
     # hf-track-index-skim-creator-cascades
     ReplaceString "\"processCascades\": \"false\"" "\"processCascades\": \"true\"" "$JSON" || ErrExit "Failed to edit $JSON."
     ReplaceString "\"processNoCascades\": \"true\"" "\"processNoCascades\": \"false\"" "$JSON" || ErrExit "Failed to edit $JSON."
@@ -361,7 +362,7 @@ function MakeScriptO2 {
   SUFFIX_SKIM_MASK="_skimX" # suffix mask to be replaced in the workflow names
   SUFFIX_SKIM="" # the actual suffix to be used instead of the mask
   # Λc → K0S p cascade reconstruction
-  [[ $DOO2_CAND_CASC -eq 1 || $DOO2_SEL_LCK0SP -eq 1 || $DOO2_TASK_LCK0SP -eq 1 || $DOO2_TREE_LCK0SP -eq 1 ]] && SUFFIX_SKIM="_v0"
+  [[ $DOO2_CAND_CASC -eq 1 || $DOO2_SEL_LCK0SP -eq 1 || $DOO2_TASK_LCK0SP -eq 1 || $DOO2_TREE_LCK0SP -eq 1 || $DOO2_DATA_LCK0SP -eq 1 ]] && SUFFIX_SKIM="_v0"
   # Ξc0/Ωc0 → Ξ π LF cascade reconstruction
   [[ $DOO2_CAND_XIC0OC0 -eq 1 || $DOO2_SEL_TOXIPI -eq 1 || $DOO2_TREE_TOXIPI -eq 1 || $DOO2_CAND_XIC_XIPIPI -eq 1 || $DOO2_SEL_XIC_XIPIPI -eq 1 || $DOO2_TASK_XIC_XIPIPI -eq 1 || $DOO2_TREE_XIC_XIPIPI -eq 1 ]] && SUFFIX_SKIM="_casc-lf"
 
@@ -427,6 +428,7 @@ function MakeScriptO2 {
   [ $DOO2_DATA_B0 -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-b0-to-d-pi"
   [ $DOO2_DATA_DPLUS -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-dplus-to-pi-k-pi"
   [ $DOO2_DATA_DS -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-ds-to-k-k-pi"
+  [ $DOO2_DATA_LCK0SP -eq 1 ] && WORKFLOWS+=" o2-analysis-hf-derived-data-creator-lc-to-k0s-p"
   # Correlations
   WF_CORR=""
   [ $DOO2_CORR_D0D0BAR_DATA -eq 1 ] && WF_CORR="o2-analysis-hf-correlator-d0-d0bar o2-analysis-hf-task-correlation-d-dbar"
